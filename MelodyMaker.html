@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melody Maker</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.38/Tone.js"></script>
+    <script type="text/javascript">
+        // PolySynth 인스턴스 생성 (Synth를 사용하여 음을 만듭니다)
+        const polySynth = new Tone.PolySynth(Tone.Synth).toDestination();
+
+        // 코드가 실행될 때 여러 음을 동시에 재생
+        function playChord() {
+            const now = Tone.now();
+            // 여러 음을 동시에 재생 (C4, E4, G4 -> C메이저 코드)
+            polySynth.triggerAttackRelease(["C4", "E4", "G4"], "16n", now);
+        }
+
+        // Tone.js 오디오 엔진 시작
+        Tone.start().then(() => playChord());
+    </script>
+    <style> 
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        #grid {
+            display: grid;
+            grid-template-columns: repeat(16, 40px);
+            grid-template-rows: repeat(7, 40px);
+            gap: 1px;
+            margin-bottom: 20px;
+        }
+        .cell {
+            width: 40px;
+            height: 40px;
+            background-color: #ddd;
+            border: 1px solid #aaa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .active {
+            /*ackground-color: #4CAF50;*/
+            background-color:rgba(76, 175, 80, 0.5);
+        }
+        #controls {
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Melody Maker</h1>
+    <div id="grid"></div>
+    <div id="controls">
+        <button id="play">Play</button>
+        <button id="stop">Stop</button>
+    </div>
+    <button type="button" onclick="playChord()">btn</button>
+    <script src="/MelodyMaker.js"></script>
+</body>
+</html>
