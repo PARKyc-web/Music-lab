@@ -2,7 +2,7 @@ Google Music-lab Using Vanilla Javascript
 
 
 # History
-2024. 11. 03. 초안 완성
+2024-11-03 초안 완성
 
 # Next Work
 1. 셀 드래그 기능
