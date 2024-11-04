@@ -7,6 +7,7 @@ const polySynth = new Tone.PolySynth(Tone.Synth).toDestination();
 
 const notes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];
 let playNotes = [];
+let isPlay = false;
 
 //attach a click listener to a play button
 document.querySelector("#play")?.addEventListener("click", async () => {
@@ -40,8 +41,8 @@ function createGrid() {
 function toggleCell(cell, row, col) {
     cell.classList.toggle('active');
     let stepInfo = cell.getAttribute("data-step");
-    
-    let activeKey = document.querySelectorAll(".cell.active.step-"+stepInfo); // 특정 키에 활성화 된 내용을 얻는다.     
+       
+    let activeKey = document.querySelectorAll(".cell.active.step-"+stepInfo); // 특정 키에 활성화 된 내용을 얻는다.
     let inner_note = [];
     for(var i=0; i<activeKey.length; i++){
         let tone = activeKey[i].getAttribute("data-tone");
@@ -54,9 +55,23 @@ function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function play() {        
-    for (let i = 0; i < playNotes.length; i++) {        
+async function play() {
+    isPlay = true;
+    for (let i = 0; i < playNotes.length; i++) {
+        if(!isPlay){
+            break;
+        }
         // let now = Tone.now();
+        let preKey = document.querySelectorAll(".cell:not(.active).step-"+(i-1)); // 특정 키에 활성화 된 내용을 얻는다.
+        preKey.forEach( el => {                        
+            el.classList.toggle("c-step");
+        });
+
+        let curKey = document.querySelectorAll(".cell:not(.active).step-"+i); // 특정 키에 활성화 된 내용을 얻는다.
+        curKey.forEach( el => {                        
+            el.classList.toggle("c-step");
+        });
+
         console.log(playNotes[i]);
         polySynth.triggerAttackRelease(playNotes[i], "8n", Tone.now());
         await delay(300);
@@ -64,8 +79,14 @@ async function play() {
 }
 
 // 스톱 기능
-function stop() {    
+function stop() {
+    isPlay = false;
     Tone.Transport.stop();
+
+    let key = document.querySelectorAll(".cell:not(.active)"); // 특정 키에 활성화 된 내용을 얻는다.
+    key.forEach( el => {
+        el.classList.remove("c-step");
+    })
 }
 
 // 화면 초기화

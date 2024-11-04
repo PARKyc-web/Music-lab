@@ -28,3 +28,4 @@ body {
 .cell.E.active{ background-color: rgba(69, 181, 161, 0.8); }
 .cell.F.active{ background-color: rgba(149, 198, 49, 0.8); }
 .cell.G.active{ background-color: rgba(237, 217, 41, 0.8); }
+.cell.c-step { background-color: rgba(235, 246, 255, 0.8); }
