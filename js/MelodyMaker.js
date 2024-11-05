@@ -55,27 +55,42 @@ function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function play() {
+async function play() {    
     isPlay = true;
-    for (let i = 0; i < playNotes.length; i++) {
+    for (let i = 0; i < playNotes.length; i++) { // length 31
         if(!isPlay){
             break;
         }
         // let now = Tone.now();
-        let preKey = document.querySelectorAll(".cell:not(.active).step-"+(i-1)); // 특정 키에 활성화 된 내용을 얻는다.
-        preKey.forEach( el => {                        
-            el.classList.toggle("c-step");
-        });
-
-        let curKey = document.querySelectorAll(".cell:not(.active).step-"+i); // 특정 키에 활성화 된 내용을 얻는다.
-        curKey.forEach( el => {                        
-            el.classList.toggle("c-step");
-        });
+        displayCurCell(i);
 
         console.log(playNotes[i]);
         polySynth.triggerAttackRelease(playNotes[i], "8n", Tone.now());
+        
+        if(isPlay && i == (playNotes.length-1)){
+            i=0;
+        } // Play 중 무한루프를 위한 부분
         await delay(300);
     }
+}
+
+function displayCurCell(i){
+    if(i == 0){
+        let preKey = document.querySelectorAll(".cell:not(.active).step-"+(playNotes.length)); // 이전에 실행했던 부분의 열 표시 제거    
+        preKey.forEach( el => {
+            el.classList.remove("c-step");
+        });
+    }else {
+        let preKey = document.querySelectorAll(".cell:not(.active).step-"+(i-1)); // 이전에 실행했던 부분의 열 표시 제거    
+        preKey.forEach( el => {
+            el.classList.remove("c-step");
+        });
+    }    
+
+    let curKey = document.querySelectorAll(".cell:not(.active).step-"+i); // 현재 실행중인 부분의 열 표시
+    curKey.forEach( el => {
+        el.classList.add("c-step");
+    });
 }
 
 // 스톱 기능

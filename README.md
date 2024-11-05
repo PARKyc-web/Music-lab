@@ -12,3 +12,4 @@ Google Music-lab Using Vanilla Javascript
 5. 음계 변경 > 현재 C4에서 시작함.
 6. 특정 음 올리기 기능
 7. 페이지 로딩할 때, 예시 음계 찍어두기
+8. 무한루프 (2024-11-05)
