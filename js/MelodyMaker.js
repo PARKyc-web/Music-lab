@@ -64,28 +64,22 @@ async function play() {
         // let now = Tone.now();
         displayCurCell(i);
 
-        console.log(playNotes[i]);
+        // console.log(playNotes[i]);
         polySynth.triggerAttackRelease(playNotes[i], "8n", Tone.now());
         
         if(isPlay && i == (playNotes.length-1)){
-            i=0;
+            i=-1;
         } // Play 중 무한루프를 위한 부분
         await delay(300);
     }
 }
 
 function displayCurCell(i){
-    if(i == 0){
-        let preKey = document.querySelectorAll(".cell:not(.active).step-"+(playNotes.length)); // 이전에 실행했던 부분의 열 표시 제거    
-        preKey.forEach( el => {
-            el.classList.remove("c-step");
-        });
-    }else {
-        let preKey = document.querySelectorAll(".cell:not(.active).step-"+(i-1)); // 이전에 실행했던 부분의 열 표시 제거    
-        preKey.forEach( el => {
-            el.classList.remove("c-step");
-        });
-    }    
+    let preStep = (i==0) ? playNotes.length-1 : (i-1); 
+    let preKey = document.querySelectorAll(".cell:not(.active).step-"+preStep); // 이전에 실행했던 부분의 열 표시 제거    
+    preKey.forEach( el => {
+        el.classList.remove("c-step");
+    });    
 
     let curKey = document.querySelectorAll(".cell:not(.active).step-"+i); // 현재 실행중인 부분의 열 표시
     curKey.forEach( el => {
