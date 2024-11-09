@@ -8,12 +8,17 @@
 </head>
 <body>
     <h1>Tone.js Song Maker</h1>
-    <div id="grid"></div>
+    <div id="grid"></div>    
     <div id="controls">
         <button id="play" type="button">Play</button>
         <button id="stop" type="button">Stop</button>
-        <button id="reset" type="button">Reset</button>
+        <button id="reset" type="button">Reset</button>        
     </div>
+
+    <div id="image-control controls">
+        <input type="file" id="bg-upload" accept="image/*">
+    </div>
+
     <script src="http://unpkg.com/tone"></script>
     <script type="text/javascript" src="./js/MelodyMaker.js"></script>
 </body>
