@@ -1,12 +1,32 @@
+
 /* HTML 구성요소  */
 const grid = document.getElementById('grid');
 const playButton = document.getElementById('play');
 const stopButton = document.getElementById('stop');
 const resetButton = document.getElementById('reset');
+const saveButton = document.getElementById('save');
 const upload = document.getElementById('bg-upload');
 
 /* Tone.js - Poly 초기화 */
-const polySynth = new Tone.PolySynth(Tone.Synth).toDestination();
+const toneSound = new Tone.PolySynth(Tone.Synth).toDestination();
+const recorder = new Tone.Recorder();
+
+/* Audio Sample 구하기 >> 피아노, 기타 등등 코드 값에 맞는 소리를 구해야함.
+const toneSound = new Tone.Sampler({
+    urls: {
+        "C4": "C4.mp3",
+        "D4": "D4.mp3",
+        "E4": "E4.mp3",
+        "F4": "F4.mp3",
+        "G4": "G4.mp3",
+        "A4": "A4.mp3",
+        "B4": "B4.mp3",
+        "C5": "C5.mp3",
+    },
+    release: 1,
+    baseUrl: "https://tonejs.github.io/audio/salamander/"
+}).toDestination();
+*/
 
 /* Tone.js 음 관련 변수 */
 const notes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];
@@ -21,7 +41,7 @@ let lastCell = null;
 //attach a click listener to a play button
 document.querySelector("#play")?.addEventListener("click", async () => {
 	await Tone.start();
-	console.log("audio is ready");
+	console.log("Audio is ready");
 });
 
 // 그리드 생성
@@ -141,7 +161,7 @@ async function play() {
         displayCurCell(i);
 
         // console.log(playNotes[i]);
-        polySynth.triggerAttackRelease(playNotes[i], "8n", Tone.now());
+        toneSound.triggerAttackRelease(playNotes[i], "8n", Tone.now());
         
         if(isPlay && i == (playNotes.length-1)){
             i=-1;
@@ -187,7 +207,7 @@ function reset(){
     }
 }
 
-
+/* 배경 변경 */
 function uploadBackground(event){
     // 파일 선택 시 이벤트 처리    
     const file = event.target.files[0]; // 사용자가 선택한 파일
@@ -207,11 +227,63 @@ function uploadBackground(event){
     reset();
 }
 
+async function saveToMP3(){
+    toneSound.connect(recorder);
+
+    await Tone.start();
+
+    recorder.start();
+    for (let i = 0; i < playNotes.length; i++) { // length 31                
+
+        displayCurCell(i);
+        toneSound.triggerAttackRelease(playNotes[i], "8n", Tone.now());
+        
+        await delay(300);
+    }
+
+    // 녹음 완료 후 MP3로 저장
+    const recordedBuffer = await recorder.stop();
+    
+    // MP3 인코딩을 위해 lamejs 사용
+    const mp3encoder = new lamejs.Mp3Encoder(1, 44100, 128); // 1채널, 44.1kHz, 128kbps
+    const mp3Data = [];
+
+    // 녹음된 샘플을 MP3로 인코딩
+    const samples = recordedBuffer.get().getChannelData(0); // 녹음된 버퍼에서 첫 번째 채널의 데이터 가져오기
+    const mp3Buffer = mp3encoder.encodeBuffer(samples);
+    mp3Data.push(mp3Buffer);
+
+    // 마지막 부분을 처리
+    const finalBuffer = mp3encoder.flush();
+    if (finalBuffer.length > 0) {
+        mp3Data.push(finalBuffer);
+    }
+
+    // Blob 생성 후 다운로드 링크 제공
+    const mp3Blob = new Blob(mp3Data, { type: 'audio/mp3' });
+    const url = URL.createObjectURL(mp3Blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'synth_sound.mp3';
+    a.click();
+}
+
+/* 예시 불러오기
+1. 배경 이미지 불러오기... easy
+2. 미리 찍어둔 노트 불러오기 ... easy
+3.
+
+*/
+function loadExample(num){
+
+}
+
 
 // 이벤트 리스너
 playButton.addEventListener("click", play);
 stopButton.addEventListener("click", stop);
 resetButton.addEventListener("click", reset);
+saveButton.addEventListener("click", saveToMP3);
 upload.addEventListener("change", uploadBackground);
 
 grid.addEventListener('mousedown', startDragging);

@@ -12,14 +12,23 @@
     <div id="controls">
         <button id="play" type="button">Play</button>
         <button id="stop" type="button">Stop</button>
-        <button id="reset" type="button">Reset</button>        
+        <button id="reset" type="button">Reset</button>
+        <button id="save" type="button">Save</button>
     </div>
 
+    <br>
+    <div id="load-control">
+        <button id="loadExample-1" type="button">EXAMPLE-1</button>
+        <button id="loadExample-2" type="button">EXAMPLE-2</button>
+    </div>
+
+    <br>
     <div id="image-control controls">
         <input type="file" id="bg-upload" accept="image/*">
-    </div>
+    </div>    
 
     <script src="http://unpkg.com/tone"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.0/lame.min.js"></script>
     <script type="text/javascript" src="./js/MelodyMaker.js"></script>
 </body>
 </html>

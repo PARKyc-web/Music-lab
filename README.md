@@ -13,3 +13,4 @@ Google Music-lab Using Vanilla Javascript
 6. 특정 음 올리기 기능
 7. 페이지 로딩할 때, 예시 음계 찍어두기
 8. 무한루프 (2024-11-05)
+9. Audio Sample 구하기 (피아노 mp3, wmv 등 파일을 구해야함....), 구글 Music Lab에서는 어떻게 하지?
