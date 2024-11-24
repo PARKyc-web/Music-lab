@@ -125,7 +125,7 @@ function uploadBackground(event){
     reset();
 }
 
-upload.addEventListener("change", uploadBackground);
+
 // Drag Function
 /*
 grid.addEventListener('mousedown', startDragging);

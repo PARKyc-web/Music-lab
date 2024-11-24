@@ -1,23 +1,34 @@
 /* Tone.js - Poly 초기화 */
-// const toneSound = new Tone.PolySynth(Tone.Synth).toDestination();
-const recorder = new Tone.Recorder();
-
-// Audio Sample 구하기 >> 피아노, 기타 등등 코드 값에 맞는 소리를 구해야함.
-const toneSound = new Tone.Sampler({    
-    urls: {
-        "C4": "../sound/piano_c4.wav",
-        "D4": "../sound/piano_d4.wav",
-        "E4": "../sound/piano_e4.wav",
-        "F4": "../sound/piano_f4.wav",
-        "G4": "../sound/piano_g4.wav",
-        "A4": "../sound/piano_a4.wav",
-        "B4": "../sound/piano_b4.wav",
-        "C5": "../sound/piano_c5.wav"
-    },
-    onload: () => {
-        console.log('피아노 소리가 로드되었습니다!');
+let toneSound = null;
+function changeInstrument(type){    
+    toneSound = null;
+    switch(type) {
+        case 'synth':
+            console.log("Loading Synth");
+            toneSound = new Tone.PolySynth(Tone.Synth).toDestination();
+            break;
+        case 'piano':
+            console.log("Loading Piano");
+            toneSound = new Tone.Sampler({    
+                urls: {
+                    "C4": "../sound/piano_c4.wav",
+                    "D4": "../sound/piano_d4.wav",
+                    "E4": "../sound/piano_e4.wav",
+                    "F4": "../sound/piano_f4.wav",
+                    "G4": "../sound/piano_g4.wav",
+                    "A4": "../sound/piano_a4.wav",
+                    "B4": "../sound/piano_b4.wav",
+                    "C5": "../sound/piano_c5.wav"
+                },
+                onload: () => {
+                    console.log('피아노 소리가 로드되었습니다!');
+                }
+            }).toDestination();
+            break;            
     }
-}).toDestination();
+    toneSound.connect(destination);
+}
+
 
 /* Tone.js 음 관련 변수 */
 const notes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];
@@ -88,19 +99,53 @@ function reset(){
     playNotes = new Array(31).fill([]);    
 }
 
+// MediaRecorder로 오디오 캡처
+const audioContext = Tone.context;
+const destination = audioContext.createMediaStreamDestination();
 
+// MediaRecorder 객체 생성
+const mediaRecorder = new MediaRecorder(destination.stream);
+let chunks = [];
 
-/* 예시 불러오기
-1. 배경 이미지 불러오기
-2. 미리 찍어둔 노트 불러오기 
-3.
-*/
-function loadExample(num){
+// 녹음 데이터 처리
+mediaRecorder.ondataavailable = (event) => {
+  chunks.push(event.data);
+};
 
+// 녹음 종료 후 처리
+mediaRecorder.onstop = () => {
+  const blob = new Blob(chunks, { type: 'audio/wav' });
+  const audioUrl = URL.createObjectURL(blob);
+  const audio = new Audio(audioUrl);
+  // audio.play();  // 녹음된 오디오 재생
+  saveAudio(blob);  // 녹음된 오디오 저장
+};
+
+// 오디오 저장 함수
+function saveAudio(blob) {
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'recorded_audio.wav';  // 다운로드할 파일 이름 설정
+  link.click();  // 파일 다운로드 트리거
 }
 
-// 이벤트 리스너
-/*
-saveButton.addEventListener("click", saveToMP3);
-upload.addEventListener("change", uploadBackground);
-*/
+async function recordMusic(){
+    // playSound();  // 음악 시작
+    mediaRecorder.start();  // 녹음 시작    
+    for (let i = 0; i < 10;/*playNotes.length;*/ i++) { // length 31      
+      displayCurCell(i);
+
+      toneSound.triggerAttackRelease(playNotes[i], "1s", Tone.now());
+      await delay(300);
+    }      
+        
+    setTimeout(() => {
+        mediaRecorder.stop();
+    }, 2000);    
+}
+
+// 버튼 클릭 시 녹음 시작
+document.getElementById('save').addEventListener('click', recordMusic);
+
+
+  

@@ -18,19 +18,19 @@
         </div>
     </div>
     <div id="grid"></div>
-    <div id="control-wrap" class="d-flex justify-content-between">
-        <div class="d-flex flex-column flex-md-row gap-4 align-items-center justify-content-left">
-            <div class="list-group list-group-radio d-grid gap-2 border-0">
-              <div class="position-relative">
-                <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="radio" name="listGroupRadioGrid" id="listGroupRadioGrid1" value="" checked="">
-                <label class="list-group-item py-3 pe-5" for="listGroupRadioGrid1">
-                  <strong class="fw-semibold">신디사이저</strong>
-                  <span class="d-block small opacity-75">기본적인 신디사이저 사운드로 소리를 재생합니다</span>
+    <div id="control-wrap">
+        <div>
+            <div>
+              <div>
+                <input type="radio" name="listGroupRadioGrid" id="listGroupRadioGrid1" value="" checked onclick="changeInstrument('synth')">
+                <label for="listGroupRadioGrid1">
+                  <strong>신디사이저</strong>
+                  <span>기본적인 신디사이저 사운드로 소리를 재생합니다</span>
                 </label>
               </div>
           
               <div class="position-relative">
-                <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="radio" name="listGroupRadioGrid" id="listGroupRadioGrid2" value="">
+                <input class="" type="radio" name="listGroupRadioGrid" id="listGroupRadioGrid2" value="" onclick="changeInstrument('piano')">
                 <label class="list-group-item py-3 pe-5" for="listGroupRadioGrid2">
                   <strong class="fw-semibold">피아노</strong>
                   <span class="d-block small opacity-75">피아노 사운드로 소리를 재생합니다.</span>
@@ -71,6 +71,8 @@
         stopButton.addEventListener("click", stop);
         resetButton.addEventListener("click", reset);
         upload.addEventListener("change", uploadBackground);
+
+        changeInstrument('synth');
       });
     </script>
 </body>
