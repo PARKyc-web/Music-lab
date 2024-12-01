@@ -48,7 +48,21 @@
             </div>
             <br><hr>            
             <div id="image-control controls">
-                <input type="file" id="bg-upload" accept="image/*">
+                <input type="file" id="bg-upload" accept="image/*">                
+            </div>
+
+            <div>
+              <input type="radio" name="bg-type" id="bg-type1" onclick="backgrounType('part')">
+              <label for="bg-type1">
+                <strong>일부분</strong>
+                <span>현재 화면에 맞게 배경화면의 일부분만 표시합니다.</span>
+              </label>
+              <br>
+              <input type="radio" name="bg-type" id="bg-type2" onclick="backgrounType('full')">
+              <label for="bg-type2">
+                <strong>전체</strong>
+                <span>현재 화면에 배경화면 전부를 표시합니다.(비율이 변경될 수 있습니다.)</span>
+              </label>
             </div>
         </div>
     </div>

@@ -56,7 +56,7 @@ async function play() {
         displayCurCell(i);
 
         // console.log(playNotes[i]);
-        toneSound.triggerAttackRelease(playNotes[i], "1s", Tone.now()); // 8n >> 아 8등분해서 출력한다.
+        toneSound.triggerAttackRelease(playNotes[i], "0.8s", Tone.now()); // 8n >> 아 8등분해서 출력한다.
         
         if(isPlay && i == (playNotes.length-1)){
             i=-1;

@@ -1,5 +1,11 @@
-const example_note_1 = [];
-const example_bg_1 = "";
+const example_note_1 = [
+                        ["C5", "C4"], ["B4", "D4"], ["A4", "E4"], ["G4", "F4"], ["G4", "F4"], ["A4", "E4"], ["B4", "D4"],
+                        ["C5", "C4"], ["B4", "D4"], ["A4", "E4"], ["G4", "F4"], ["G4", "F4"], ["A4", "E4"], ["B4", "D4"],
+                        ["C5", "C4"], ["B4", "D4"], ["A4", "E4"], ["G4", "F4"], ["G4", "F4"], ["A4", "E4"], ["B4", "D4"],
+                        ["C5", "C4"], ["B4", "D4"], ["A4", "E4"], ["G4", "F4"], ["G4", "F4"], ["A4", "E4"], ["B4", "D4"],
+                        ["C5", "C4"], [], []
+                       ]
+const example_bg_1 = "/image/super-mario.png";
 
 const exmaple_note_2 = [];
 const example_bg_2 = "";
@@ -10,5 +16,6 @@ const example_bg_2 = "";
 3.
 */
 function loadExample(num){
-
+    
 }
+

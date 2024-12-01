@@ -125,6 +125,16 @@ function uploadBackground(event){
     reset();
 }
 
+function backgrounType(type){
+    var ge = document.getElementById('grid');
+
+    if(type == 'part'){
+        ge.style.backgroundSize = 'cover';
+    } else if (type == 'full'){
+        ge.style.backgroundSize = 'contain';
+    }    
+}
+
 
 // Drag Function
 /*
