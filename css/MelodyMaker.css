@@ -5,8 +5,8 @@ body {
 
 #grid {
     display: grid;
-    grid-template-columns: repeat(31, 55px); /* 16열 */
-    grid-template-rows: repeat(8, 55px); /* 8행 */
+    grid-template-columns: repeat(31, 60px); /* 16열 */
+    grid-template-rows: repeat(8, 60px); /* 8행 */
     gap: 1px;
     margin: 20px auto;
     background-image: url("/image/super-mario.png");
@@ -14,8 +14,8 @@ body {
 }
 
 .cell {
-    width: 55px;
-    height: 55px;
+    width: 60px;
+    height: 60px;
     background-color: rgba(239, 239, 240, 0.5);
     cursor: pointer;
     border: 1px solid black

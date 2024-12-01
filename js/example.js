@@ -10,12 +10,19 @@ const example_bg_1 = "/image/super-mario.png";
 const exmaple_note_2 = [];
 const example_bg_2 = "";
 
-/* 예시 불러오기
-1. 배경 이미지 불러오기
-2. 미리 찍어둔 노트 불러오기 
-3.
-*/
 function loadExample(num){
-    
+    var note = (num==1) ? example_note_1 : exmaple_note_2;
+    var bg = (num==1) ? example_bg_1 : example_bg_2;
+
+    note.forEach((el, idx) => {
+        // el => Array
+        // idx => 0, 1, 2 .... 30        
+        let inner_note = el;        
+        inner_note.forEach((ie, step) =>{
+            let i_cell = document.querySelector('div[data-tone="'+ notes.indexOf(ie) +'"][data-step="'+ idx +'"]');
+            toggleCell(i_cell);            
+        });        
+    });
+
 }
 

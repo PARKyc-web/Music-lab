@@ -13,8 +13,8 @@
     <div class="d-flex justify-content-between">
         <h1>Tone.js Song Maker</h1>
         <div id="load-control">
-            <button id="loadExample-1" type="button" >EXAMPLE-1</button>
-            <button id="loadExample-2" type="button">EXAMPLE-2</button>
+            <button id="loadExample-1" type="button" onclick="loadExample(1)">EXAMPLE-1</button>
+            <button id="loadExample-2" type="button" onclick="loadExample(2)">EXAMPLE-2</button>
         </div>
     </div>
     <div id="grid"></div>
@@ -76,7 +76,8 @@
     -->
     <script type="text/javascript" src="./js/button.js"></script>
     <script type="text/javascript" src="./js/grid.js"></script>
-    <script type="text/javascript" src="./js/MelodyMaker.js"></script>    
+    <script type="text/javascript" src="./js/MelodyMaker.js"></script>
+    <script type="text/javascript" src="./js/example.js"></script>
     <script type="text/javascript">
       document.addEventListener('DOMContentLoaded', function() {
         createGrid(); // 그리드 생성

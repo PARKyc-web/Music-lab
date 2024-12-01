@@ -16,7 +16,7 @@ function createGrid() {
             cell.classList.add('step-'+j);
             cell.setAttribute("data-tone", (7-i));
             cell.setAttribute("data-step", j);            
-            cell.addEventListener('click', () => toggleCell(cell, i, j));            
+            cell.addEventListener('click', () => toggleCell(cell));
             grid.appendChild(cell);
         }
     }
@@ -27,7 +27,7 @@ function createGrid() {
 }
 
 /* 셀 활성화/비활성화 */
-function toggleCell(cell, row, col) {
+function toggleCell(cell) {
     cell.classList.toggle('active');
     let stepInfo = cell.getAttribute("data-step");
        
