@@ -11,8 +11,15 @@ const exmaple_note_2 = [];
 const example_bg_2 = "";
 
 function loadExample(num){
+    // 숫자가 몇개가 되던간에 숫자를 추가해서 만들 수 있도록
+    // 그리고 example_note를 동적으로 추가할 수 있도록 하자.
+    // 추가만 하면 자동으로 버튼도 생기고 >> 흠... 나중에 추가하기로 하자.
     var note = (num==1) ? example_note_1 : exmaple_note_2;
     var bg = (num==1) ? example_bg_1 : example_bg_2;
+    var ge = document.getElementById('grid');
+
+    ge.style.backgroundImage = 'url("'+ bg +'")';
+    reset();
 
     note.forEach((el, idx) => {
         // el => Array
@@ -22,7 +29,7 @@ function loadExample(num){
             let i_cell = document.querySelector('div[data-tone="'+ notes.indexOf(ie) +'"][data-step="'+ idx +'"]');
             toggleCell(i_cell);            
         });        
-    });
+    });       
 
 }
 

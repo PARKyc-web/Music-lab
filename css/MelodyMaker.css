@@ -7,7 +7,7 @@ body {
     display: grid;
     grid-template-columns: repeat(31, 60px); /* 16열 */
     grid-template-rows: repeat(8, 60px); /* 8행 */
-    gap: 1px;
+    gap: 0.1px;
     margin: 20px auto;
     background-image: url("/image/super-mario.png");
     background-size: cover;
@@ -18,7 +18,7 @@ body {
     height: 60px;
     background-color: rgba(239, 239, 240, 0.5);
     cursor: pointer;
-    border: 1px solid black
+    border: 1px solid black;
 }
 
 .cell.A.active{ background-color: rgba(247, 148, 61, 0.8); }
@@ -29,3 +29,33 @@ body {
 .cell.F.active{ background-color: rgba(149, 198, 49, 0.8); }
 .cell.G.active{ background-color: rgba(237, 217, 41, 0.8); }
 .cell.c-step { background-color: rgba(235, 246, 255, 0.8); }
+
+
+#control-wrap {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+
+.control-left {    
+    padding : 10px;
+    text-align: left;
+}
+.control-left .list-group-item{
+    width: 80%;
+}
+
+.control-right {    
+    padding : 10px;
+    text-align: right;
+}
+.control-right .list-group{
+    align-items:flex-end;
+}
+.control-right .list-group-item{
+    width: 80%;
+    
+}
+
+.list-group-item.active {
+    background-color: rgba(13, 110, 253, 0.7);
+}

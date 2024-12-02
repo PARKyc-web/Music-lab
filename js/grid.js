@@ -132,8 +132,19 @@ function backgrounType(type){
         ge.style.backgroundSize = 'cover';
     } else if (type == 'full'){
         ge.style.backgroundSize = 'contain';
-    }    
+    }
+    displayBackBtn(type);
 }
+function displayBackBtn(type){
+    let bg_btn = document.querySelectorAll(".list-group-item-action.panel-right");
+    bg_btn.forEach(function(btn) {        
+        btn.classList.remove("active");
+        if(btn.classList.contains(type)){
+            btn.classList.add("active");
+        }
+    });
+}
+
 
 
 // Drag Function

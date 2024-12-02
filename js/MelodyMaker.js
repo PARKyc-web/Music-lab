@@ -1,7 +1,7 @@
 /* Tone.js - Poly 초기화 */
 let toneSound = null;
 function changeInstrument(type){    
-    toneSound = null;
+    toneSound = null;    
     switch(type) {
         case 'synth':
             console.log("Loading Synth");
@@ -27,7 +27,19 @@ function changeInstrument(type){
             break;            
     }
     toneSound.connect(destination);
+    displayInstrument(type);
 }
+
+function displayInstrument(type){
+    let inst_btn = document.querySelectorAll(".list-group-item-action.panel-left");
+    inst_btn.forEach(function(btn) {        
+        btn.classList.remove("active");
+        if(btn.classList.contains(type)){
+            btn.classList.add("active");
+        }
+    });
+}
+
 
 
 /* Tone.js 음 관련 변수 */
@@ -132,7 +144,7 @@ function saveAudio(blob) {
 async function recordMusic(){
     // playSound();  // 음악 시작
     mediaRecorder.start();  // 녹음 시작    
-    for (let i = 0; i < 10;/*playNotes.length;*/ i++) { // length 31      
+    for (let i = 0; i < playNotes.length; i++) { // length 31
       displayCurCell(i);
 
       toneSound.triggerAttackRelease(playNotes[i], "1s", Tone.now());
