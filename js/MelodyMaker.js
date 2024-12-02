@@ -11,14 +11,14 @@ function changeInstrument(type){
             console.log("Loading Piano");
             toneSound = new Tone.Sampler({    
                 urls: {
-                    "C4": "../sound/piano_c4.wav",
-                    "D4": "../sound/piano_d4.wav",
-                    "E4": "../sound/piano_e4.wav",
-                    "F4": "../sound/piano_f4.wav",
-                    "G4": "../sound/piano_g4.wav",
-                    "A4": "../sound/piano_a4.wav",
-                    "B4": "../sound/piano_b4.wav",
-                    "C5": "../sound/piano_c5.wav"
+                    "C4": "./sound/piano_c4.wav",
+                    "D4": "./sound/piano_d4.wav",
+                    "E4": "./sound/piano_e4.wav",
+                    "F4": "./sound/piano_f4.wav",
+                    "G4": "./sound/piano_g4.wav",
+                    "A4": "./sound/piano_a4.wav",
+                    "B4": "./sound/piano_b4.wav",
+                    "C5": "./sound/piano_c5.wav"
                 },
                 onload: () => {
                     console.log('피아노 소리가 로드되었습니다!');

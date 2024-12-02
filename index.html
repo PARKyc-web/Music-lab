@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tone.js Song Maker</title>    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/MelodyMaker.css">    
+  </head>
+<body>
+    <div class="">
+        <h1>Tone.js Song Maker</h1>
+        <div id="load-control">
+            <button id="loadExample-1" class="btn btn-primary" type="button" onclick="loadExample(1)">예시 1번</button>
+            <button id="loadExample-2" class="btn btn-success" type="button" onclick="loadExample(2)">예시 2번</button>
+        </div>
+    </div>
+    <div id="grid"></div>
+
+    <hr>
+
+    <div id="control-wrap">
+        <div class="control-panel control-left">          
+          <ul class="list-group">
+            <div class="list-group-item list-group-item-action panel-left synth active" onclick="changeInstrument('synth')">              
+              <h5 class="mb-1"><strong>신디사이저(Synth, Synthesizer)</strong></h5>
+              <small>기본적인 신디사이저로 소리를 재생합니다.</small>
+            </div>
+
+            <div class="list-group-item list-group-item-action panel-left piano" onclick="changeInstrument('piano')">              
+              <h5 class="mb-1"><strong>피아노(Piano)</strong></h5>
+              <small>피아노로 소리를 재생합니다.</small>
+            </div>
+          </ul>
+        </div>
+
+        <div class="control-panel control-middle">
+          <button id="play" class="btn btn-primary rounded-pill px-3" type="button">Play</button>
+          <button id="stop" class="btn btn-secondary rounded-pill px-3" type="button">Stop</button>
+          <button id="reset" class="btn btn-danger rounded-pill px-3" type="button">Reset</button>
+          <button id="save" class="btn btn-success rounded-pill px-3" type="button">Save</button>
+        </div>
+
+        <div class="control-panel control-right">          
+          <ul class="list-group">
+            <div class="list-group-item list-group-item-action panel-right full" onclick="backgrounType('full')">              
+              <h5 class="mb-1"><strong>전체(Contain)</strong></h5>
+              <small>현재 화면에 배경화면 전부를 표시합니다.(비율이 변경될 수 있습니다.)</small>
+            </div>
+
+            <div class="list-group-item list-group-item-action panel-right part active" onclick="backgrounType('part')">              
+              <h5 class="mb-1"><strong>일부분(Cover)</strong></h5>
+              <small>현재 화면에 맞게 배경화면의 일부분만 표시합니다.</small>
+            </div>
+          </ul>
+          <div id="image-control controls">
+            <input type="file" id="bg-upload" accept="image/*">
+          </div>          
+        </div>
+
+    </div>
+
+    <br>
+    <script src="http://unpkg.com/tone"></script>        
+    <script type="text/javascript" src="./js/button.js"></script>
+    <script type="text/javascript" src="./js/grid.js"></script>
+    <script type="text/javascript" src="./js/MelodyMaker.js"></script>
+    <script type="text/javascript" src="./js/example.js"></script>
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function() {
+        createGrid(); // 그리드 생성
+
+        playButton.addEventListener("click", play);
+        stopButton.addEventListener("click", stop);
+        resetButton.addEventListener("click", reset);
+        upload.addEventListener("change", uploadBackground);
+
+        changeInstrument('synth');
+      });
+    </script>
+</body>
+</html>
