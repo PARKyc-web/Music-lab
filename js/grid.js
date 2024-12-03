@@ -3,13 +3,20 @@ const grid = document.getElementById('grid');
 /* Drag 관련 변수 */
 let isDragging = false;
 let lastCell = null;
+const cellWidth = 60;
 
 // 그리드 생성
 function createGrid() {
+    const gridCols = Math.floor(window.innerWidth / cellWidth);
+    grid.style.gridTemplateColumns = `repeat(${gridCols}, ${cellWidth}px)`;
+    grid.style.gridTemplateRows = `repeat(8, ${cellWidth}px)`;    
+
+    grid.innerHTML = '';
+
     for (let i = 0; i < 8; i++) {  
         // let tone = String.fromCharCode(67+7-i);
         let tone = String.fromCharCode(((67 + 7 - i - 65) % 7) + 65);
-        for (let j = 0; j < 31; j++) {
+        for (let j = 0; j < gridCols; j++) {
             const cell = document.createElement('div');            
             cell.classList.add('cell');
             cell.classList.add(tone);
@@ -21,7 +28,7 @@ function createGrid() {
         }
     }
     
-    for(let k=0; k<31; k++){
+    for(let k=0; k<gridCols; k++){
         playNotes.push([]);
     }
 }
@@ -146,7 +153,7 @@ function displayBackBtn(type){
 }
 
 
-
+window.addEventListener('resize', createGrid);
 // Drag Function
 /*
 grid.addEventListener('mousedown', startDragging);

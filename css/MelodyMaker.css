@@ -5,9 +5,11 @@ body {
 
 #grid {
     display: grid;
-    grid-template-columns: repeat(31, 60px); /* 16열 */
-    grid-template-rows: repeat(8, 60px); /* 8행 */
-    gap: 0.1px;
+    /*
+    grid-template-columns: repeat(32, 60px);
+    grid-template-rows: repeat(8, 60px);
+    */
+    gap: 0px;
     margin: 20px auto;
     background-image: url("../image/super-mario.png");
     background-size: cover;
