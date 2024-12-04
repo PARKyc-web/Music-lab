@@ -1,16 +1,17 @@
 const grid = document.getElementById('grid');
 
-/* Drag 관련 변수 */
 let isDragging = false;
 let lastCell = null;
 const cellWidth = 60;
+let gridWidth = 32; // Grud Default Cols >> 32
 
 // 그리드 생성
 function createGrid() {
-    const gridCols = Math.floor(window.innerWidth / cellWidth);
+    const gridCols = Math.floor(window.innerWidth / cellWidth);    
     grid.style.gridTemplateColumns = `repeat(${gridCols}, ${cellWidth}px)`;
     grid.style.gridTemplateRows = `repeat(8, ${cellWidth}px)`;    
 
+    gridWidth = gridCols;
     grid.innerHTML = '';
 
     for (let i = 0; i < 8; i++) {  
