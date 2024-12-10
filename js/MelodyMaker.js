@@ -40,8 +40,6 @@ function displayInstrument(type){
     });
 }
 
-
-
 /* Tone.js 음 관련 변수 */
 const notes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];
 let playNotes = [];
@@ -108,7 +106,8 @@ function reset(){
         el.classList.remove("active");
     });
 
-    playNotes = new Array(31).fill([]);    
+    // 31개가 되어버림 강제로... 여기가 문제인데
+    playNotes = new Array(gridWidth).fill([]);
 }
 
 // MediaRecorder로 오디오 캡처
