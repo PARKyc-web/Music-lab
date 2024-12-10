@@ -10,7 +10,6 @@ function createGrid() {
     const gridCols = Math.floor(window.innerWidth / cellWidth);    
     grid.style.gridTemplateColumns = `repeat(${gridCols}, ${cellWidth}px)`;
     grid.style.gridTemplateRows = `repeat(8, ${cellWidth}px)`;    
-
     gridWidth = gridCols;
     grid.innerHTML = '';
 

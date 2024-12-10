@@ -24,20 +24,26 @@ function loadExample(num){
     ge.style.backgroundImage = 'url("'+ bg +'")';
     reset();
 
-    for(let idx = 0; idx<playNotes.length; idx++){
-        note[idx]
+    for(let idx = 0; idx<playNotes.length; idx++){        
+        playNotes[idx] = note[idx%31];
+        
+        inner_note = note[idx%31];
+        inner_note.forEach((ie, step) =>{
+            let i_cell = document.querySelector('div[data-tone="'+ notes.indexOf(ie) +'"][data-step="'+ idx +'"]');
+            toggleCell(i_cell);
+        });        
     }
-
+    /*
     note.forEach((el, idx) => {
         // el => Array
         // idx => 0, 1, 2 .... 30        
         let inner_note = el;        
         inner_note.forEach((ie, step) =>{
             let i_cell = document.querySelector('div[data-tone="'+ notes.indexOf(ie) +'"][data-step="'+ idx +'"]');
-            toggleCell(i_cell);            
+            toggleCell(i_cell);
         });        
     });
-
+    */
     if(num==2){
         backgrounType('full');
     }
